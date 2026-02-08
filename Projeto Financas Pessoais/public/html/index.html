@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Finanças Pessoais</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Layout principal -->
+  <div class="layout">
+    <!-- Barra lateral -->
+    <div class="sidebar" id="sidebar">
+      <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+
+      <div class="menu-item" onclick="toggleSubmenu('submenuAdicionar')">
+        ➕ <span class="menu-text">Adicionar</span>
+      </div>
+      <div class="submenu" id="submenuAdicionar">
+        <div class="submenu-item">➕ Receita</div>
+        <div class="submenu-item">➕ Despesa</div>
+        <div class="submenu-item">➕ Conta</div>
+      </div>
+
+      <div class="menu-item" onclick="toggleSubmenu('submenuRemover')">
+        ➖ <span class="menu-text">Remover</span>
+      </div>
+      <div class="submenu" id="submenuRemover">
+        <div class="submenu-item">➖ Receita</div>
+        <div class="submenu-item">➖ Despesa</div>
+        <div class="submenu-item">➖ Conta</div>
+      </div>
+
+      <div class="menu-item" onclick="toggleSubmenu('submenuAlterar')">
+        ✏️ <span class="menu-text">Alterar</span>
+      </div>
+      <div class="submenu" id="submenuAlterar">
+        <div class="submenu-item">✏️ Receita</div>
+        <div class="submenu-item">✏️ Despesa</div>
+        <div class="submenu-item">✏️ Conta</div>
+      </div>
+
+      <div class="menu-item">📊 <span class="menu-text">Relatório</span></div>
+      <div class="menu-item">🚪 <span class="menu-text">Sair</span></div>
+    </div>
+
+
+    <!-- Conteúdo principal -->
+    <div class="main">
+      <header>
+        <span class="titulo">Finanças Pessoais</span>
+        <div class="info-topo">
+          <span class="icon">📅</span>
+          <span id="datetime"></span>
+          <span class="icon">👤</span>
+          <span id="user">Janderson</span>
+        </div>
+      </header>
+
+      <div class="periodo">
+        <label for="inicio">Período de:</label>
+        <input type="date" id="inicio">
+        <label for="fim">Até:</label>
+        <input type="date" id="fim">
+        <button >Filtrar</button>
+      </div>
+
+      <div class="dashboard">
+        <!-- Linha superior -->
+        <div class="groupbox resumo">
+          <h3>📋 Saldo</h3>
+          <p id="resumoValor" data-real="💰 R$ 2800,00">
+            <span class="valor">💰 R$ 2800,00</span>
+            <button class="toggle-valor" onclick="toggleValor('resumoValor', this)">🔓</button>
+          </p>
+        </div>
+
+        <div class="groupbox despesas">
+          <h3>💸 Despesas</h3>
+          <p id="despesasValor" data-real="R$ 1500,00">
+            <span class="valor">R$ 1500,00</span>
+            <button class="toggle-valor" onclick="toggleValor('despesasValor', this)">🔓</button>
+          </p>
+        </div>
+
+        <div class="groupbox receitas">
+          <h3>📈 Receitas</h3>
+          <p id="receitasValor" data-real="R$ 4300,00">
+            <span class="valor">R$ 4300,00</span>
+            <button class="toggle-valor" onclick="toggleValor('receitasValor', this)">🔓</button>
+          </p>
+        </div>
+
+        <!-- Linha de gráficos -->
+        <div class="grafico-row">
+          <div class="groupbox">
+            <h3>📊 Totais</h3>
+            <canvas id="graficoTotais"></canvas>
+          </div>
+          <div class="groupbox">
+            <h3>📊 Categorias de Despesa</h3>
+            <canvas id="graficoCategorias"></canvas>
+          </div>
+        </div>
+
+        <!-- Contas a vencer -->
+        <div class="groupbox contas">
+          <h3>📑 Contas a Vencer</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Valor</th>
+                <th>Vencimento</th>
+                <th>Descrição</th>
+                <th>Recebedor</th>
+                <th>Pagador</th>
+                <th>Categoria</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="tabelaContas"></tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="Script.js">
+    
+  </script>
+</body>
+</html>
