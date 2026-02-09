@@ -33,56 +33,81 @@ updateDateTime();
 setInterval(updateDateTime, 1000); // atualiza a cada segundo
 
 // Gráfico Totais
-const ctxTotais = document.getElementById('graficoTotais').getContext('2d');
-new Chart(ctxTotais, {
-  type: 'bar',
-  data: {
-    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril'],
-    datasets: [{
-      label: 'Receitas',
-      data: [1200, 1500, 1800, 2000],
-      backgroundColor: 'rgba(46, 204, 113, 0.7)'
-    }, {
-      label: 'Despesas',
-      data: [800, 1000, 1200, 900],
-      backgroundColor: 'rgba(231, 76, 60, 0.7)'
-    }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: { position: 'top' },
-      title: { display: false }
-    }
-  }
-});
+fetch("http://localhost:3000/resumo")
+  .then(res => res.json())
+  .then(data => {
+    const ctx = document.getElementById("graficoTotais").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Receitas", "Despesas", "Saldo"],
+        datasets: [{
+        label: "",
+          data: [data.receitas, data.despesas, data.resumo],
+          backgroundColor: ["#4CAF50", "#F44336", "#2196F3"]
+        }]
+      },
+      options: {
+        plugins: {
+          legend: {display:false},
+          datalabels: {
+            anchor: "end",
+            align: "top",
+            formatter: (value) => "R$ " + value.toFixed(2),
+            color: "#000",
+            font: { weight: "bold" }
+          },
+          title: {
+            display: false,
+            text: "Resumo Financeiro"
+          }
+        }
+      },
+      plugins: [ChartDataLabels]
+    });
+  });
+
 
 // Gráfico Categorias
-const ctxCategorias = document.getElementById('graficoCategorias').getContext('2d');
-new Chart(ctxCategorias, {
-  type: 'pie',
-  data: {
-    labels: ['Alimentação', 'Transporte', 'Moradia', 'Cartoes'],
-    datasets: [{
-      data: [500, 300, 700, 200],
-      backgroundColor: [
-        'rgba(52, 152, 219, 0.7)',
-        'rgba(155, 89, 182, 0.7)',
-        'rgba(241, 196, 15, 0.7)',
-        'rgba(230, 126, 34, 0.7)'
-      ]
-    }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: { position: 'right' },
-      title: { display: false }
-    }
-  }
-});
+fetch("http://localhost:3000/categorias-despesa")
+  .then(res => res.json())
+  .then(data => {
+    const ctx = document.getElementById("graficoCategorias").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar", // pode ser "pie" ou "doughnut"
+      data: {
+        labels: data.map(item => item.categoria),
+        datasets: [{
+          label: "Despesas (R$)",
+          data: data.map(item => item.total),
+          backgroundColor: [
+            "#F44336", "#FF9800", "#4CAF50", "#2196F3",
+            "#9C27B0", "#795548", "#607D8B", "#FFC107","#215678"
+          ]
+        }]
+      },
+      options: {
+        plugins: {
+          legend: {display:false},
+          datalabels: {
+            anchor: "end",
+            align: "top",
+            formatter: (value) => "R$ " + value.toFixed(2),
+            color: "#000",
+            font: { weight: "bold" }
+          },
+          title: {
+            display: false,
+            text: "Despesas por Categoria (ordenadas)"
+          }
+        }
+      },
+      plugins: [ChartDataLabels]
+    });
+  });
+
 
 function toggleSubmenu(id) {
   const submenu = document.getElementById(id);
