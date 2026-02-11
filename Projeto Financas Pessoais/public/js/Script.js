@@ -41,11 +41,11 @@ fetch("http://localhost:3000/resumo")
     new Chart(ctx, {
       type: "bar",
       data: {
-        labels: ["Receitas", "Despesas", "Saldo"],
+        labels: ["Receitas", "Despesas"],
         datasets: [{
         label: "",
-          data: [data.receitas, data.despesas, data.resumo],
-          backgroundColor: ["#4CAF50", "#F44336", "#2196F3"]
+          data: [data.receitas, data.despesas],
+          backgroundColor: ["#4CAF50", "#F44336"]
         }]
       },
       options: {
