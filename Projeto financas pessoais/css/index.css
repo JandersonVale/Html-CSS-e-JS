@@ -1,0 +1,76 @@
+body {
+  margin: 0; /* remove margens padrão do navegador */
+  font-family: Arial, sans-serif; /* define a fonte principal da página */
+  background-color: #f0f0f0; /* cor de fundo cinza claro */
+  display: flex; /* ativa o flexbox para organizar elementos */
+  justify-content: center; /* centraliza horizontalmente */
+  align-items: center; /* centraliza verticalmente */
+  height: 100vh; /* ocupa toda a altura da tela */
+}
+
+.login-card {
+  background: #fff; /* fundo branco do card */
+  padding: 40px; /* espaço interno */
+  border-radius: 30px; /* cantos bem arredondados */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* sombra suave */
+  width: 320px; /* largura fixa */
+  text-align: center; /* centraliza o conteúdo dentro do card */
+}
+
+.login-card h2 {
+  margin-bottom: 20px; /* espaço abaixo do título */
+  font-weight: bold; /* deixa o texto em negrito */
+}
+
+.input-group {
+  position: relative; /* permite posicionar ícones dentro do campo */
+  margin: 15px 0; /* espaço entre os campos */
+}
+
+.input-group input {
+  width: 100%; /* ocupa toda a largura disponível */
+  padding: 12px; /* espaço interno */
+  border: 1px solid #ccc; /* borda cinza clara */
+  border-radius: 15px; /* cantos arredondados */
+  box-sizing: border-box; /* inclui padding e borda no cálculo da largura */
+}
+
+.input-group i {
+  position: absolute; /* posiciona o ícone dentro do campo */
+  right: 10px; /* distância da borda direita */
+  top: 50%; /* centraliza verticalmente */
+  transform: translateY(-50%); /* ajusta para ficar exatamente no meio */
+  color: #666; /* cor cinza do ícone */
+  cursor: pointer; /* cursor de mão ao passar por cima */
+}
+
+.login-card button {
+  width: 100%; /* ocupa toda a largura */
+  padding: 12px; /* espaço interno */
+  border: none; /* remove borda padrão */
+  border-radius: 15px; /* cantos arredondados */
+  background: linear-gradient(90deg, #007bff, #6f42c1); /* degradê azul → roxo */
+  color: #fff; /* texto branco */
+  font-weight: bold; /* texto em negrito */
+  cursor: pointer; /* cursor de mão */
+  margin-top: 4px; /* pequeno espaço acima */
+}
+
+.login-card button:hover {
+  opacity: 0.9; /* efeito de transparência ao passar o mouse */
+}
+
+.login-card .signup {
+  margin-top: 15px; /* espaço acima do texto de cadastro */
+  font-size: 14px; /* tamanho menor */
+}
+
+.login-card .signup a {
+  color: #007bff; /* link azul */
+  text-decoration: none; /* remove sublinhado */
+  font-weight: bold; /* texto em negrito */
+}
+
+.login-card .signup a:hover {
+  text-decoration: underline; /* sublinhado ao passar o mouse */
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Financeiro</title>
+  <link rel="stylesheet" href="../css/dash.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <a onclick="toggleSubmenu(this)">Dashboard</a>
+    <div class="submenu">
+      <a href="#">Visão Geral</a>
+      <a href="#">Detalhes</a>
+    </div>
+    <a onclick="toggleSubmenu(this)">Relatórios</a>
+    <div class="submenu">
+      <a href="#">Mensal</a>
+      <a href="#">Anual</a>
+    </div>
+    <a onclick="toggleSubmenu(this)">Configurações</a>
+    <div class="submenu">
+      <a href="#">Usuários</a>
+      <a href="#">Sistema</a>
+    </div>
+    <a href="#">Sair</a>
+  </div>
+
+  <!-- Conteúdo principal -->
+  <div class="main">
+    <div class="header">
+      <h1>Dashboard Financeiro</h1>
+    </div>
+
+    <!-- Cards superiores -->
+    <div class="top-row">
+      <div class="card"><h3>Receitas</h3><p>R$ 10.000</p></div>
+      <div class="card"><h3>Despesas</h3><p>R$ 7.500</p></div>
+      <div class="card"><h3>Saldo</h3><p>R$ 2.500</p></div>
+    </div>
+
+    <!-- Cards do meio -->
+    <div class="middle-row">
+      <div class="card">
+        <h3>Receitas x Despesas</h3>
+        <canvas id="receitasDespesasChart"></canvas>
+      </div>
+      <div class="card">
+        <h3>Gastos por Categoria</h3>
+        <canvas id="categoriasChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Card inferior -->
+    <div class="bottom-row">
+      <div class="card">
+        <h3>Contas a Vencer</h3>
+        <div class="status-select">
+          <select>
+            <option value="todos">Todos</option>
+            <option value="pendente">Pendente</option>
+            <option value="pago">Pago</option>
+            <option value="atrasado">Atrasado</option>
+          </select>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Conta</th>
+              <th>Valor</th>
+              <th>Vencimento</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Luz</td><td>R$ 200</td><td>15/02/2026</td><td>Pendente</td></tr>
+            <tr><td>Água</td><td>R$ 150</td><td>20/02/2026</td><td>Atrasado</td></tr>
+            <tr><td>Internet</td><td>R$ 100</td><td>25/02/2026</td><td>Pago</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="../js/dash.js"></script>
+</body>
+</html>
