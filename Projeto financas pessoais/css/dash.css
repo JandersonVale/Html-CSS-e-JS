@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(90deg, #007bff, #6f42c1);
+  background:  #f0f0f0;
   min-height: 100vh;
   display: flex; /* layout flex entre sidebar e main */
 }
@@ -9,7 +9,7 @@ body {
 /* Sidebar fixo */
 .sidebar {
   flex-shrink: 0; /* impede que o sidebar force o main */
-  width: 120px;
+  width: 150px;
   border-radius: 10px;
   background: #fff;
   color: #333;
@@ -95,6 +95,7 @@ body {
 
 .header h1 {
   margin: 0;
+  margin-left: 10px;
   font-size: 22px;
   font-weight: bold;
 }
@@ -135,7 +136,7 @@ body {
 /* Combo Status */
 .status-select {
   position: absolute;
-  top: 20px;
+  top: 15px;
   right: 20px;
 }
 
@@ -143,10 +144,12 @@ body {
   padding: 6px 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
-  background: linear-gradient(90deg, #007bff, #6f42c1);
-  color: #fff;
-  font-weight: bold;
+  background-color: #ffffff;
+  color: #000000;
   cursor: pointer;
+}
+.status-select label{
+   font-weight: bold;
 }
 
 /* Tabela */
@@ -171,4 +174,24 @@ table th {
 canvas {
   max-height: 250px; /* reduz altura dos gráficos */
   width: 100% !important;
+}
+.filter-date {
+  display: flex;              /* coloca os inputs lado a lado */
+  justify-content: right;    /* centraliza no box */
+  gap: 5px;                  /* espaço horizontal entre os campos */
+  margin-top: 15px;
+  margin-right: 10px;           /* espaço acima (em relação ao título) */
+}
+
+.filter-date label {
+  font-weight: bold;
+  margin-right: 8px;
+  margin-left: 8px;
+  margin-top: 5px;            /* espaço entre label e input */
+}
+
+.filter-date input {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
