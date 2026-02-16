@@ -60,3 +60,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const select = document.querySelector(".status-select select");
   select.addEventListener("change", filtrarTabela);
 });
+
+function toggleValor(id, btn) {
+  const valor = document.getElementById(id);
+  if (valor.dataset.hidden === "true") {
+    valor.textContent = valor.dataset.original; // mostra valor real
+    valor.dataset.hidden = "false";
+    btn.textContent = "🔓"; // cadeado aberto
+  } else {
+    valor.dataset.original = valor.textContent; // guarda valor real
+    valor.textContent = "R$ ****"; // oculta com asteriscos
+    valor.dataset.hidden = "true";
+    btn.textContent = "🔒"; // cadeado fechado
+  }
+}

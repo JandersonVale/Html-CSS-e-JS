@@ -10,51 +10,55 @@
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
     <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-    <a onclick="toggleSubmenu(this)">💰 Receitas</a>
+    <a onclick="toggleSubmenu(this)">📝Lançamentos</a>
     <div class="submenu">
-      <a href="#">Cadastrar</a>
-      <a href="#">Editar</a>
-    </div>
-    <a onclick="toggleSubmenu(this)">💸 Despesas</a>
-    <div class="submenu">
-      <a href="#">Cadastrar</a>
-      <a href="#">Editar</a>
+      <a href="receive.html">Receitas</a>
+      <a href="expenses.html">Despesas</a>
     </div>
     <a onclick="toggleSubmenu(this)">📊 Relatorios</a>
     <div class="submenu">
-      <a href="#">Consultar</a>
+      <a href="#">Receitas</a>
+      <a href="#">Despesas</a>
+      <a href="#">Geral</a>
     </div>
-    <a href="#">Sair</a>
+    <a href="../index.html">🚪Sair</a>
   </div>
-
   <!-- Conteúdo principal -->
   <div class="main">
     <div class="header">
-      
-      <h1>Dashboard Financeiro</h1>
-      <div class="filter-date">
-      <label for="data-inicio">Início:</label>
+      <h1>Ola!, Janderson</h1>
+    </div>
+    <div class="filter-date">
+      <label for="data-inicio">Periodo de:</label>
       <input type="date" id="data-inicio" name="data-inicio">
-      <label for="data-fim">Fim:</label>
+      <label for="data-fim">a:</label>
       <input type="date" id="data-fim" name="data-fim">
+    </div>
+    <!-- Cards superiores -->
+    <div class="top-row">
+      <div class="card receitas-card">
+        <h3>💰 Receitas 
+          <button class="toggle-saldo" onclick="toggleValor('receitas-valor', this)">🔓</button>
+        </h3>
+        <p id="receitas-valor">R$ 10.000,00</p>
+      </div>
+
+      <div class="card despesas-card">
+        <h3>💸 Despesas 
+          <button class="toggle-saldo" onclick="toggleValor('despesas-valor', this)">🔓</button>
+        </h3>
+        <p id="despesas-valor">R$ 7.500,00</p>
+      </div>
+
+      <div class="card saldo-card">
+        <h3>💵 Saldo 
+          <button class="toggle-saldo" onclick="toggleValor('saldo-valor', this)">🔓</button>
+        </h3>
+        <p id="saldo-valor">R$ 2.500,00</p>
       </div>
     </div>
 
-    <!-- Cards superiores -->
-  <div class="top-row">
-    <div class="card">
-      <h3>&#128176; Receitas</h3> <!-- 💰 -->
-      <p>R$ 10.000,00</p>
-    </div>
-    <div class="card">
-      <h3>&#128184; Despesas</h3> <!-- 💸 -->
-      <p>R$ 7.500,00</p>
-    </div>
-    <div class="card">
-      <h3>&#128181; Saldo</h3> <!-- 💵 -->
-      <p>R$ 2.500,00</p>
-    </div>
-  </div>
+
 
 
     <!-- Cards do meio -->
@@ -72,7 +76,7 @@
     <!-- Card inferior -->
     <div class="bottom-row">
       <div class="card">
-        <h3>Contas a Vencer</h3>
+        <h3>📑Contas a Vencer</h3>
         <div class="status-select">
           <label for="status-select">Status:</label>
           <select>

@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-card {
+    background: #fff;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    width: 350px;
+    text-align: center;
+}
+
+.form-card h2 {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.input-group {
+    position: relative;
+    margin: 15px 0;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #333;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+.input-group i {
+    position: absolute;
+    right: 12px;
+    top: 65%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.form-card button {
+  width: 100%; /* ocupa toda a largura */
+  padding: 12px; /* espaço interno */
+  border: none; /* remove borda padrão */
+  border-radius: 15px; /* cantos arredondados */
+  background: linear-gradient(90deg, #007bff, #6f42c1); /* degradê azul → roxo */
+  color: #fff; /* texto branco */
+  font-weight: bold; /* texto em negrito */
+  cursor: pointer; /* cursor de mão */
+  margin-top: 4px; /* pequeno espaço acima */
+  margin-bottom: 5px;
+}
+
+.form-card button:hover {
+      opacity: 0.9;
+}
+
+.form-card a {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  display: block;              /* ocupa toda a largura como um bloco */
+  text-align: center;          /* centraliza o texto */
+  text-decoration: none;       /* remove sublinhado */
+  width: 93%;                 /* mesma largura do botão */
+  padding: 13px;               /* espaço interno */
+  border-radius: 15px;         /* cantos arredondados */
+  background: linear-gradient(90deg, #007bff, #6f42c1); /* degradê azul → roxo */
+  color: #fff;                 /* texto branco */
+  font-weight: bold;           /* texto em negrito */
+  cursor: pointer;             /* cursor de mão */
+  margin-top: 5px;            /* espaço acima */
+}
+
+.form-card a:hover {
+  opacity: 0.9;
+}
+
+
