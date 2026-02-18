@@ -12,7 +12,7 @@ body {
     background: #fff;
     padding: 40px;
     border-radius: 30px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     width: 350px;
     text-align: center;
 }
@@ -53,40 +53,58 @@ body {
 }
 
 .form-card button {
-  width: 100%; /* ocupa toda a largura */
-  padding: 12px; /* espaço interno */
-  border: none; /* remove borda padrão */
-  border-radius: 15px; /* cantos arredondados */
-  background: linear-gradient(90deg, #007bff, #6f42c1); /* degradê azul → roxo */
-  color: #fff; /* texto branco */
-  font-weight: bold; /* texto em negrito */
-  cursor: pointer; /* cursor de mão */
-  margin-top: 4px; /* pequeno espaço acima */
-  margin-bottom: 5px;
+    width: 100%;
+    /* ocupa toda a largura */
+    padding: 12px;
+    /* espaço interno */
+    border: none;
+    /* remove borda padrão */
+    border-radius: 15px;
+    /* cantos arredondados */
+    background: linear-gradient(90deg, #007bff, #6f42c1);
+    /* degradê azul → roxo */
+    color: #fff;
+    /* texto branco */
+    font-weight: bold;
+    /* texto em negrito */
+    cursor: pointer;
+    /* cursor de mão */
+    margin-top: 4px;
+    /* pequeno espaço acima */
+    margin-bottom: 5px;
 }
 
 .form-card button:hover {
-      opacity: 0.9;
+    opacity: 0.9;
 }
 
 .form-card a {
-  font-family: Arial, sans-serif;
-  font-size: 12px;
-  display: block;              /* ocupa toda a largura como um bloco */
-  text-align: center;          /* centraliza o texto */
-  text-decoration: none;       /* remove sublinhado */
-  width: 93%;                 /* mesma largura do botão */
-  padding: 13px;               /* espaço interno */
-  border-radius: 15px;         /* cantos arredondados */
-  background: linear-gradient(90deg, #007bff, #6f42c1); /* degradê azul → roxo */
-  color: #fff;                 /* texto branco */
-  font-weight: bold;           /* texto em negrito */
-  cursor: pointer;             /* cursor de mão */
-  margin-top: 5px;            /* espaço acima */
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    display: block;
+    /* ocupa toda a largura como um bloco */
+    text-align: center;
+    /* centraliza o texto */
+    text-decoration: none;
+    /* remove sublinhado */
+    width: 93%;
+    /* mesma largura do botão */
+    padding: 13px;
+    /* espaço interno */
+    border-radius: 15px;
+    /* cantos arredondados */
+    background: linear-gradient(90deg, #007bff, #6f42c1);
+    /* degradê azul → roxo */
+    color: #fff;
+    /* texto branco */
+    font-weight: bold;
+    /* texto em negrito */
+    cursor: pointer;
+    /* cursor de mão */
+    margin-top: 5px;
+    /* espaço acima */
 }
 
 .form-card a:hover {
-  opacity: 0.9;
+    opacity: 0.9;
 }
-
-

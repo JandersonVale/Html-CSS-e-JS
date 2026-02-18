@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/receive-data.css" />
+    <title>Tela de Dados</title>
+    <style></style>
+  </head>
+  <body>
+    <div class="form-card">
+      <h2>Gerenciamento de Dados</h2>
+      <div class="top-bar">
+        <div class="search">
+          <input type="text" placeholder="Pesquisar..." />
+          <i class="fa fa-search"></i>
+        </div>
+        <div class="filter-date">
+          <label for="data-inicio">Período de:</label>
+          <input type="date" id="data-inicio" name="data-inicio" />
+          <label for="data-fim">a:</label>
+          <input type="date" id="data-fim" name="data-fim" />
+        </div>
+        <button onclick="window.location.href = 'receive.html'">Incluir</button>
+      </div>
+      <table id="data-table">
+        <thead>
+          <tr>
+            <th>Pagador</th>
+            <th>Valor Recebido</th>
+            <th>Data Prevista</th>
+            <th>Data Pagamento</th>
+            <th>Categoria</th>
+            <th>Status</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <button class="action-btn edit-btn">Editar</button>
+              <button class="action-btn delete-btn">Excluir</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="btn-voltardash">
+        <button onclick="window.location.href = 'dash.html'">Voltar</button>
+      </div>
+    </div>
+    <!-- Modal de edição -->
+    <div class="modal" id="editModal">
+      <div class="modal-content">
+        <h3>Editar Registro</h3>
+
+        <label for="editPagador">Pagador</label>
+        <input type="text" id="editPagador" placeholder="Pagador" required />
+
+        <label for="editValor">Valor Recebido</label>
+        <input
+          type="number"
+          id="editValor"
+          step="0.01"
+          placeholder="Valor"
+          required
+        />
+
+        <label for="editDataPrev">Data Prevista</label>
+        <input type="date" id="editDataPrev" required />
+
+        <label for="editDataRec">Data Recebimento</label>
+        <input type="date" id="editDataRec" />
+
+        <label for="editCateg">Categoria</label>
+        <select id="editCateg" required>
+          <option>Salario</option>
+          <option>Beneficio</option>
+          <option>Emprestimo</option>
+          <option>Vendas</option>
+          <option>Pagamento</option>
+        </select>
+
+        <label for="editStatus">Status</label>
+        <select id="editStatus" required>
+          <option>Pago</option>
+          <option>Pendente</option>
+          <option>Atrasado</option>
+        </select>
+
+        <button class="save-btn" type="button" onclick="salvarEdicao()">
+          Salvar
+        </button>
+        <button class="close-btn" type="button" onclick="fecharModal()">
+          Cancelar
+        </button>
+      </div>
+    </div>
+
+    <script src="../js/receive-data.js"></script>
+  </body>
+</html>
