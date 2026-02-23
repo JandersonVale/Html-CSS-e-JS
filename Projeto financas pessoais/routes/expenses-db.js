@@ -1,9 +1,9 @@
-// receives-db.js
+// expenses-db.js - ajustado para dash.js
 const express = require("express");
 const router = express.Router();
 
 module.exports = (pool) => {
-  // POST - inserir receita
+  // POST - inserir despesa
   router.post("/", (req, res) => {
     const {
       recebedor,
@@ -23,13 +23,13 @@ module.exports = (pool) => {
     pool.query(
       sql,
       [
-        recebedor,
-        valor,
-        data_vencimento,
-        data_pagamento,
-        categoria,
-        descricao,
-        status,
+        recebedor || "",
+        valor || 0,
+        data_vencimento || null,
+        data_pagamento || null,
+        categoria || "",
+        descricao || "",
+        status || "Pendente",
       ],
       (err, result) => {
         if (err) {
@@ -41,7 +41,7 @@ module.exports = (pool) => {
     );
   });
 
-  // GET - listar receitas
+  // GET - listar despesas filtrando por periodo (dt_venc)
   router.get("/", (req, res) => {
     const { inicio, fim } = req.query;
 
@@ -67,15 +67,26 @@ module.exports = (pool) => {
     pool.query(sql, params, (err, results) => {
       if (err) {
         console.error("Erro ao consultar despesas:", err);
-        return res.status(500).json({
-          error: "Erro interno ao consultar despesas",
-        });
+        return res.status(500).json({ error: "Erro interno ao consultar despesas" });
       }
-      res.json(results);
+
+      const formattedResults = results.map((r) => ({
+        id: r.id,
+        dt_lanc: r.dt_lanc,
+        recebedor: r.recebedor || "",
+        valor: parseFloat(r.valor) || 0,
+        dt_venc: r.dt_venc ? r.dt_venc.toISOString().split("T")[0] : null,
+        dt_pagam: r.dt_pagam ? r.dt_pagam.toISOString().split("T")[0] : null,
+        categ: r.categ || "",
+        descri: r.descri || "",
+        status: r.status || "Pendente",
+      }));
+
+      res.json(formattedResults);
     });
   });
 
-  // PUT - atualizar receita
+  // PUT - atualizar despesa
   router.put("/:id", (req, res) => {
     const { id } = req.params;
     const {
@@ -97,26 +108,26 @@ module.exports = (pool) => {
     pool.query(
       sql,
       [
-        recebedor,
-        valor,
-        data_vencimento,
-        data_pagamento,
-        categoria,
-        descricao,
-        status,
+        recebedor || "",
+        valor || 0,
+        data_vencimento || null,
+        data_pagamento || null,
+        categoria || "",
+        descricao || "",
+        status || "Pendente",
         id,
       ],
       (err) => {
         if (err) {
-          console.error("Erro ao atualizar receita:", err);
+          console.error("Erro ao atualizar despesa:", err);
           return res.status(500).json({ message: "Erro ao atualizar" });
         }
-        res.json({ message: "Receita atualizada com sucesso!" });
+        res.json({ message: "Despesa atualizada com sucesso!" });
       },
     );
   });
 
-  // DELETE - excluir receita
+  // DELETE - excluir despesa
   router.delete("/:id", (req, res) => {
     const { id } = req.params;
     const sql = "DELETE FROM expenses WHERE id = ?";
@@ -126,7 +137,7 @@ module.exports = (pool) => {
         console.error("Erro ao excluir despesa:", err);
         return res.status(500).json({ message: "Erro ao excluir" });
       }
-      res.json({ message: "despesa excluída com sucesso!" });
+      res.json({ message: "Despesa excluída com sucesso!" });
     });
   });
 

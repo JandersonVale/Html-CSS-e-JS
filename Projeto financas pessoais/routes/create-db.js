@@ -50,6 +50,8 @@ CREATE TABLE IF NOT EXISTS users (
 );
 `;
 
+
+
 connection.query(sql, (err) => {
   if (err) {
     console.error("Erro ao criar banco/tabelas:", err);

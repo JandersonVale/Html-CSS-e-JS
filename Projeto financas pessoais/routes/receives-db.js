@@ -1,4 +1,4 @@
-// receives-db.js
+// receives-db.js - ajustado para dash.js
 const express = require("express");
 const router = express.Router();
 
@@ -25,11 +25,11 @@ module.exports = (pool) => {
       [
         pagador,
         valor,
-        data_prevista,
-        data_recebimento,
-        categoria,
-        descricao,
-        status,
+        data_prevista || null,
+        data_recebimento || null,
+        categoria || null,
+        descricao || null,
+        status || "Pendente",
       ],
       (err, result) => {
         if (err) {
@@ -41,7 +41,7 @@ module.exports = (pool) => {
     );
   });
 
-  // GET - listar receitas
+  // GET - listar receitas filtrando por periodo (dt_prev)
   router.get("/", (req, res) => {
     const { inicio, fim } = req.query;
 
@@ -52,11 +52,13 @@ module.exports = (pool) => {
     `;
     const params = [];
 
+    // Filtro por data inicial
     if (inicio) {
       sql += " AND dt_prev >= ?";
       params.push(inicio);
     }
 
+    // Filtro por data final
     if (fim) {
       sql += " AND dt_prev <= ?";
       params.push(fim);
@@ -67,11 +69,23 @@ module.exports = (pool) => {
     pool.query(sql, params, (err, results) => {
       if (err) {
         console.error("Erro ao consultar receitas:", err);
-        return res.status(500).json({
-          error: "Erro interno ao consultar receitas",
-        });
+        return res.status(500).json({ error: "Erro interno ao consultar receitas" });
       }
-      res.json(results);
+
+      // Garante que datas nulas não quebrem o front
+      const formattedResults = results.map(r => ({
+        id: r.id,
+        dt_lanc: r.dt_lanc,
+        pagador: r.pagador,
+        valor: parseFloat(r.valor) || 0,
+        dt_prev: r.dt_prev ? r.dt_prev.toISOString().split("T")[0] : null,
+        dt_receb: r.dt_receb ? r.dt_receb.toISOString().split("T")[0] : null,
+        categ: r.categ || "",
+        descri: r.descri || "",
+        status: r.status || "Pendente"
+      }));
+
+      res.json(formattedResults);
     });
   });
 
@@ -99,11 +113,11 @@ module.exports = (pool) => {
       [
         pagador,
         valor,
-        data_prevista,
-        data_recebimento,
-        categoria,
-        descricao,
-        status,
+        data_prevista || null,
+        data_recebimento || null,
+        categoria || null,
+        descricao || null,
+        status || "Pendente",
         id,
       ],
       (err) => {

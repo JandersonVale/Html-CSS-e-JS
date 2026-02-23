@@ -73,7 +73,7 @@ body {
 }
 
 .login-card button {
-  width: 100%;
+  width: 40%;
   /* ocupa toda a largura */
   padding: 12px;
   /* espaço interno */
@@ -156,10 +156,6 @@ body {
   border-left: 6px solid #f44336;
 }
 
-.popup-box.confirm {
-  border-left: 6px solid #ffa500;
-}
-
 /* Botão fechar */
 .popup-close {
   position: absolute;
@@ -177,26 +173,3 @@ body {
   color: #000;
 }
 
-/* Confirm */
-.popup-box.confirm p {
-  margin-bottom: 15px;
-}
-
-.popup-btn {
-  margin: 5px;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.popup-btn.yes {
-  background-color: #4caf50;
-  color: #fff;
-}
-
-.popup-btn.no {
-  background-color: #f44336;
-  color: #fff;
-}
