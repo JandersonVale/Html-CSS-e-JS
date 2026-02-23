@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS receives (
   dt_prev DATE,
   dt_receb DATE,
   categ VARCHAR(50),
+  descri VARCHAR(50),
   status VARCHAR(50)
 );
 
@@ -34,6 +35,7 @@ CREATE TABLE IF NOT EXISTS expenses (
   dt_venc DATE,
   dt_pagam DATE,
   categ VARCHAR(50),
+  descri VARCHAR(50),
   status VARCHAR(50)
 );
 

@@ -12,7 +12,7 @@
   </head>
   <body>
     <div class="form-card">
-      <h2>Gerenciamento de Dados</h2>
+      <h2>Gerenciamento de Receitas</h2>
       <div class="top-bar">
         <div class="search">
           <input type="text" placeholder="Pesquisar..." />
@@ -34,6 +34,7 @@
             <th>Data Prevista</th>
             <th>Data Pagamento</th>
             <th>Categoria</th>
+            <th>Descricao</th>
             <th>Status</th>
             <th>Ação</th>
           </tr>
@@ -76,18 +77,25 @@
 
         <label for="editCateg">Categoria</label>
         <select id="editCateg" required>
-          <option>Salario</option>
-          <option>Beneficio</option>
-          <option>Emprestimo</option>
-          <option>Vendas</option>
-          <option>Pagamento</option>
+          <option value="Salário">Salário</option>
+          <option value="Benefício">Benefício</option>
+          <option value="Empréstimo">Empréstimo</option>
+          <option value="Vendas">Vendas</option>
+          <option value="Pagamento">Pagamento</option>
         </select>
+        <label for="editDescricao">Descricao</label>
+        <input
+          type="text"
+          id="editDescricao"
+          placeholder="Descricao"
+          required
+        />
 
         <label for="editStatus">Status</label>
         <select id="editStatus" required>
-          <option>Pago</option>
-          <option>Pendente</option>
-          <option>Atrasado</option>
+          <option value="Pendente">Pendente</option>
+          <option value="Pago">Pago</option>
+          <option value="Atrasado">Atrasado</option>
         </select>
 
         <button class="save-btn" type="button" onclick="salvarEdicao()">

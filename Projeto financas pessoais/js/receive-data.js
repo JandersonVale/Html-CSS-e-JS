@@ -21,9 +21,10 @@ async function carregarReceitas() {
         <td>${r.dt_prev ? new Date(r.dt_prev).toLocaleDateString("pt-BR") : "-"}</td>
         <td>${r.dt_receb ? new Date(r.dt_receb).toLocaleDateString("pt-BR") : "-"}</td>
         <td>${r.categ}</td>
+        <td>${r.descri}</td>
         <td>${r.status}</td>
         <td>
-          <button class="action-btn edit-btn" onclick="abrirModal(${r.id}, '${r.pagador}', ${r.valor}, '${r.dt_prev}', '${r.dt_receb}', '${r.categ}', '${r.status}')">
+          <button class="action-btn edit-btn" onclick="abrirModal(${r.id}, '${r.pagador}', ${r.valor}, '${r.dt_prev}', '${r.dt_receb}', '${r.categ}', '${r.descri}', '${r.status}')">
             <i class="fa fa-edit"></i> Editar
           </button>
           <button class="action-btn delete-btn" onclick="excluirReceita(${r.id})">
@@ -39,7 +40,7 @@ async function carregarReceitas() {
   }
 }
 
-function abrirModal(id, pagador, valor, dtPrev, dtRec, categ, status) {
+function abrirModal(id, pagador, valor, dtPrev, dtRec, categ, descri, status) {
   document.getElementById("editPagador").value = pagador;
   document.getElementById("editValor").value = valor;
   document.getElementById("editDataPrev").value = dtPrev
@@ -49,6 +50,7 @@ function abrirModal(id, pagador, valor, dtPrev, dtRec, categ, status) {
     ? dtRec.split("T")[0]
     : "";
   document.getElementById("editCateg").value = categ;
+  document.getElementById("editDescricao").value = descri;
   document.getElementById("editStatus").value = status;
 
   document.getElementById("editModal").dataset.id = id;
@@ -68,6 +70,7 @@ async function salvarEdicao() {
     data_prevista: document.getElementById("editDataPrev").value.trim(),
     data_recebimento: document.getElementById("editDataRec").value.trim(),
     categoria: document.getElementById("editCateg").value.trim(),
+    descricao: document.getElementById("editDescricao").value.trim(),
     status: document.getElementById("editStatus").value.trim(),
   };
 
@@ -77,6 +80,7 @@ async function salvarEdicao() {
     !dados.data_prevista ||
     !dados.data_recebimento ||
     !dados.categoria ||
+    !dados.descricao ||
     !dados.status
   ) {
     mostrarPopup("Preencha todos os campos antes de cadastrar", true);
@@ -184,3 +188,23 @@ function mostrarConfirmacao(msg, onConfirm) {
   overlay.appendChild(box);
   document.body.appendChild(overlay);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.querySelector(".search input");
+  const table = document.getElementById("data-table");
+
+  searchInput.addEventListener("keyup", function () {
+    const filtro = searchInput.value.toLowerCase();
+
+    // pega todas as linhas atuais do tbody
+    const rows = table.querySelectorAll("tbody tr");
+
+    rows.forEach((row) => {
+      const pagadorCell = row.cells[0]; // primeira coluna é Pagador
+      if (pagadorCell) {
+        const texto = pagadorCell.textContent.toLowerCase();
+        row.style.display = texto.includes(filtro) ? "" : "none";
+      }
+    });
+  });
+});

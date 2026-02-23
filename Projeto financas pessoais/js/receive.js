@@ -9,6 +9,7 @@ form.addEventListener("submit", async function (e) {
     data_prevista: document.getElementById("editDataPrev").value.trim(),
     data_recebimento: document.getElementById("editDataRec").value.trim(),
     categoria: document.getElementById("editCateg").value.trim(),
+    descricao: document.getElementById("editDescricao").value.trim(),
     status: document.getElementById("status").value.trim(),
   };
 
@@ -19,6 +20,7 @@ form.addEventListener("submit", async function (e) {
     !dados.data_prevista ||
     !dados.data_recebimento ||
     !dados.categoria ||
+    !dados.descricao ||
     !dados.status
   ) {
     mostrarPopup("Preencha todos os campos antes de cadastrar", true);
