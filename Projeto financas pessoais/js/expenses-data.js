@@ -74,18 +74,22 @@ async function salvarEdicao() {
     status: document.getElementById("editStatusDes").value.trim(),
   };
 
-  if (
-    !dados.recebedor ||
-    !dados.valor ||
-    !dados.data_vencimento ||
-    !dados.data_pagamento ||
-    !dados.categoria ||
-    !dados.descricao ||
-    !dados.status
-  ) {
-    mostrarPopup("Preencha todos os campos antes de cadastrar", true);
-    return; // interrompe o envio
-  }
+    // validação simples ajustada para despesas
+if (
+  !dados.recebedor ||
+  !dados.valor ||
+  !dados.data_vencimento ||
+  !dados.categoria ||
+  !dados.descricao
+) {
+  mostrarPopup("Preencha todos os campos obrigatórios antes de cadastrar", true);
+  return; // interrompe o envio
+}
+
+// Se data_pagamento estiver vazia, define null
+if (!dados.data_pagamento) {
+  dados.data_pagamento = null;
+}
 
   try {
     const response = await fetch(`http://localhost:3000/expenses/${id}`, {

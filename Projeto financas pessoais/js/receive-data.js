@@ -74,18 +74,23 @@ async function salvarEdicao() {
     status: document.getElementById("editStatus").value.trim(),
   };
 
-  if (
-    !dados.pagador ||
-    !dados.valor ||
-    !dados.data_prevista ||
-    !dados.data_recebimento ||
-    !dados.categoria ||
-    !dados.descricao ||
-    !dados.status
-  ) {
-    mostrarPopup("Preencha todos os campos antes de cadastrar", true);
-    return; // interrompe o envio
-  }
+if (
+  !dados.pagador ||
+  !dados.valor ||
+  !dados.data_prevista ||
+  !dados.categoria ||
+  !dados.descricao ||
+  !dados.status
+) {
+  mostrarPopup("Preencha todos os campos obrigatórios antes de cadastrar", true);
+  return; // interrompe o envio
+}
+
+// Se data_recebimento estiver vazia, define null
+if (!dados.data_recebimento) {
+  dados.data_recebimento = null;
+}
+
 
   try {
     const response = await fetch(`http://localhost:3000/receives/${id}`, {

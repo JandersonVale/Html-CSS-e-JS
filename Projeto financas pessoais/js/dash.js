@@ -1,7 +1,7 @@
-// SIDEBAR E SUBMENU
+// SIDEBAR E SUBMENU (não usados mais se removeu sidebar, mas deixei por segurança)
 function toggleSidebar() {
   const sidebar = document.getElementById("sidebar");
-  sidebar.classList.toggle("collapsed");
+  if (sidebar) sidebar.classList.toggle("collapsed");
 }
 
 function toggleSubmenu(element) {
@@ -12,7 +12,7 @@ function toggleSubmenu(element) {
   }
 }
 
-// VARIÁVEIS DE GRÁFICOS
+// Variáveis de gráficos
 let chartReceitasDespesas;
 let chartCategorias;
 
@@ -22,9 +22,7 @@ async function carregarDashPorPeriodo() {
   const fim = document.getElementById("data-fim").value;
 
   try {
-    // ------------------------------
     // FETCH DESPESAS
-    // ------------------------------
     const urlDespesas = new URL("http://localhost:3000/expenses");
     if (inicio) urlDespesas.searchParams.append("inicio", inicio);
     if (fim) urlDespesas.searchParams.append("fim", fim);
@@ -32,9 +30,7 @@ async function carregarDashPorPeriodo() {
     const responseDespesas = await fetch(urlDespesas);
     const despesas = await responseDespesas.json();
 
-    // ------------------------------
     // FETCH RECEITAS
-    // ------------------------------
     const urlReceitas = new URL("http://localhost:3000/receives");
     if (inicio) urlReceitas.searchParams.append("inicio", inicio);
     if (fim) urlReceitas.searchParams.append("fim", fim);
@@ -42,9 +38,7 @@ async function carregarDashPorPeriodo() {
     const responseReceitas = await fetch(urlReceitas);
     const receitas = await responseReceitas.json();
 
-    // ------------------------------
     // CALCULA TOTAIS
-    // ------------------------------
     const totalDespesas = despesas.reduce(
       (sum, d) => sum + parseFloat(d.valor),
       0,
@@ -64,21 +58,19 @@ async function carregarDashPorPeriodo() {
     despesasCard.textContent = `R$ ${totalDespesas.toFixed(2)}`;
     saldoCard.textContent = `R$ ${saldo.toFixed(2)}`;
 
-    // ------------------------------
     // ATUALIZA TABELA DE DESPESAS
-    // ------------------------------
     const tbody = document.querySelector(".bottom-row tbody");
     tbody.innerHTML = "";
     despesas.forEach((d) => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td>${d.recebedor || d.pagador}</td>
+        <td>${d.recebedor || d.pagador || '-'}</td>
         <td>R$ ${parseFloat(d.valor).toFixed(2)}</td>
         <td>${d.dt_venc ? new Date(d.dt_venc).toLocaleDateString("pt-BR") : "-"}</td>
         <td>${d.dt_pagam ? new Date(d.dt_pagam).toLocaleDateString("pt-BR") : "-"}</td>
         <td>${d.categ || "-"}</td>
         <td>${d.descri || "-"}</td>
-        <td>${d.status}</td>
+        <td>${d.status || "-"}</td>
       `;
       tbody.appendChild(tr);
     });
@@ -86,18 +78,14 @@ async function carregarDashPorPeriodo() {
     // FILTRA TABELA PELO STATUS
     filtrarTabela();
 
-    // ------------------------------
     // ATUALIZA GRÁFICOS
-    // ------------------------------
     atualizarGraficos(receitas, despesas);
   } catch (error) {
     console.error("Erro ao carregar dash:", error);
   }
 }
 
-// ------------------------------
 // FUNÇÃO PARA ATUALIZAR GRÁFICOS
-// ------------------------------
 function atualizarGraficos(receitas, despesas) {
   const totalReceitas = receitas.reduce(
     (sum, r) => sum + parseFloat(r.valor),
@@ -159,9 +147,7 @@ function atualizarGraficos(receitas, despesas) {
   });
 }
 
-// ------------------------------
 // FILTRAR TABELA PELO STATUS
-// ------------------------------
 function filtrarTabela() {
   const select = document.querySelector(".status-select select");
   const filtro = select.value.toLowerCase();
@@ -174,9 +160,7 @@ function filtrarTabela() {
   });
 }
 
-// ------------------------------
 // OCULTAR/MOSTRAR VALORES DOS CARDS
-// ------------------------------
 function toggleValor(id, btn) {
   const valor = document.getElementById(id);
   if (valor.dataset.hidden === "true") {
@@ -191,25 +175,17 @@ function toggleValor(id, btn) {
   }
 }
 
-// ------------------------------
-// EVENTOS
-// ------------------------------
+// CONTROLE DOS DROPDOWNS (NOVO MENU SOBREPOSTO)
 document.addEventListener("DOMContentLoaded", () => {
-  // Carrega tudo ao iniciar
+  // Carrega dados iniciais
   carregarDashPorPeriodo();
 
-  // Atualiza ao mudar data
-  document
-    .getElementById("data-inicio")
-    .addEventListener("change", carregarDashPorPeriodo);
-  document
-    .getElementById("data-fim")
-    .addEventListener("change", carregarDashPorPeriodo);
+  // Atualiza ao mudar datas
+  document.getElementById("data-inicio").addEventListener("change", carregarDashPorPeriodo);
+  document.getElementById("data-fim").addEventListener("change", carregarDashPorPeriodo);
 
-  // Filtra tabela pelo select
-  document
-    .querySelector(".status-select select")
-    .addEventListener("change", filtrarTabela);
+  // Filtra tabela ao alterar select
+  document.querySelector(".status-select select").addEventListener("change", filtrarTabela);
 
   // Exibe nome do usuário logado
   const usuario = JSON.parse(localStorage.getItem("user"));
@@ -218,4 +194,23 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     window.location.href = "../index.html";
   }
+
+  // Dropdowns
+  document.querySelectorAll(".dropdown-btn").forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+      const dropdown = btn.parentElement;
+      dropdown.classList.toggle("show");
+
+      // Fecha outros dropdowns abertos
+      document.querySelectorAll(".dropdown").forEach(d => {
+        if (d !== dropdown) d.classList.remove("show");
+      });
+    });
+  });
+
+  // Fecha dropdowns ao clicar fora
+  document.addEventListener("click", () => {
+    document.querySelectorAll(".dropdown").forEach(d => d.classList.remove("show"));
+  });
 });
